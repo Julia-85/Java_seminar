@@ -1,0 +1,49 @@
+/**Создать множество, ключь и значение строки.
+Добавить шесть элементов. Вывести в консоль значения. Добавить ко всем значениям символ "!".
+Создать второе множество с таким же обобщением.
+Ключи второго множества частично совпадают с ключеми первого.
+Объеденить значания во втором множестве и первом если ключи совподают. Вывести результат в консоль.**/
+ package org.example;
+ import java.util.*;
+public class Urok5 {
+    public static void main(String[] args) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("Сергей", "отладка");
+        map.put("Николай", "бухгалтерия");
+        map.put("Иван Иванович", "станки");
+        map.put("Анна", "сборка");
+        map.put("Владимир", "перевозка");
+        map.put("Александр", "директор");
+
+        map.forEach((k, v) -> System.out.println(k + " " + v));
+        System.out.println(map);
+
+        map.computeIfPresent("Сергей", (k, v) -> v + '!');
+        map.computeIfPresent("Николай", (k, v) -> v + '!');
+        map.computeIfPresent("Иван Иванович", (k, v) -> v + '!');
+        map.computeIfPresent("Анна", (k, v) -> v + '!');
+        map.computeIfPresent("Владимир", (k, v) -> v + '!');
+        map.computeIfPresent("Александр", (k, v) -> v + '!');
+        System.out.println(map);
+        map.forEach((k, v) -> System.out.println(k + " " + v));
+        System.out.println(map);
+
+
+        HashMap<String, String> maps = new HashMap<>();
+        maps.put("Костя", "отладка");
+        maps.put("Елена", "бухгалтерия");
+        maps.put("Андрей", "станки");
+        maps.put("Ольга", "сборка");
+        maps.put("Зоя", "перевозка");
+        maps.put("Кот", "директор");
+        System.out.println(maps);
+
+
+        for (String item : map.keySet()) {
+           map.merge(item, maps.getOrDefault(item, ""), (newVal, tempVal) -> newVal + tempVal);
+        }
+        System.out.println(map);
+        map.forEach((k, v) -> System.out.println(k + " " + v));
+    }
+
+}
